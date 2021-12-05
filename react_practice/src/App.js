@@ -1,25 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+const lightStyle = {
+  backgroundColor: "#eef",
+  color: "#006",
+  padding: "10px"
+};
+
+const darkStyle = {
+  backgroundColor: "#006",
+  color: "#eef",
+  padding: "10px"
+};
+
+const App = () => {
+  const [theme, setTheme] = useState(lightStyle);
+  const changeTheme = () => {
+    theme === lightStyle ? setTheme(darkStyle) : setTheme(lightStyle);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={theme}>
+      <Title value="autumn勉強会" />
+      <Message value="長丁場ですが楽しみましょう！" />
+      <Message value="今年もそろそろ終わりますね〜。" />
+      <Message value="お昼です。" />
+      <Button changeTheme={changeTheme}/>
     </div>
   );
+}
+
+const Title = (props) => {
+  return (
+    <h2>{props.value}</h2>
+  );
+}
+
+const Message = (props) => {
+  return (
+    <p>{props.value}</p>
+  );
+}
+
+const Button = ({changeTheme}) => {
+  return <button onClick={changeTheme}>ボタン</button>
 }
 
 export default App;
